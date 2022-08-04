@@ -1,0 +1,21 @@
+.h1 {
+    color: red;
+}
+.header {
+    width: 100vw;
+    height: 20vh;
+    background-color: aqua;
+    text-align: center;
+}
+.section {
+    text-align: center;
+    background-color: blue;
+    font-weight: bold;
+    color: yellow;
+    width: 100vw;
+    height: 70vh;
+}
+
+.p {
+    color: green;
+}
