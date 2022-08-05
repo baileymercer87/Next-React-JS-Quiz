@@ -8,7 +8,7 @@ export default function Home() {
   function handleSelection (selection) {
     const { pathname } = Router;
     if (pathname === "/") {
-      Router.push("/" + selection);
+      Router.push("/quizzes/" + selection);
     }
   }
   return (<div>
