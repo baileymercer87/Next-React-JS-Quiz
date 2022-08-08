@@ -16,6 +16,15 @@ export default function Quiz ( { quiz }) {
         const button = document.getElementById('begin-btn');
         button.parentElement.removeChild(button);
         generateQuestion();
+        const area = document.getElementById('answer-area');
+        area.innerHTML = '';
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.id = 'answer-input';
+        area.appendChild(input);
+        const submit = document.createElement('button');
+        button.innerHTML = 'Submit';
+        area.appendChild(button);
     }
 
     function generateQuestion () { 
@@ -46,8 +55,11 @@ export default function Quiz ( { quiz }) {
         </Head>
         <h1>HELLO</h1>
         <h2>{timer}</h2>
-        <button onClick={startGame} id='begin-btn'>Begin Game</button>
+        <div id='begin-screen'>
+            <button onClick={startGame} id='begin-btn'>Begin Game</button>
+        </div>
         <h3>{question}</h3>
+        <div id='answer-area'></div>
     </>);
 }
 
