@@ -15,7 +15,8 @@ export default function Quiz ( { quiz }) {
         setStarted(true);
         const button = document.getElementById('begin-btn');
         button.parentElement.removeChild(button);
-        generateQuestion();
+
+        const key = generateQuestion();
         const area = document.getElementById('answer-area');
         area.innerHTML = '';
         const input = document.createElement('input');
@@ -23,6 +24,17 @@ export default function Quiz ( { quiz }) {
         input.id = 'answer-input';
         area.appendChild(input);
         const submit = document.createElement('button');
+        submit.onclick = ((key) => {
+            console.log(answer);
+            console.log(guess);
+            const guess = document.getElementById('answer-input');
+            if (guess.value === answer) {
+                console.log('correct');
+            } else {
+                console.log('wrong');
+            }
+            guess.value = "";
+        })
         button.innerHTML = 'Submit';
         area.appendChild(button);
     }
@@ -32,11 +44,8 @@ export default function Quiz ( { quiz }) {
         var rand =  keys.length * Math.random() << 0;
         const capital = quiz[keys[rand]];
         const country = keys[rand];
-        if(Math.round(Math.random()) === 1) {
-            setQuestion('What is the capital of ' + country + '?');
-        } else {
-            setQuestion(capital + ' is the capital of what country?');
-        }
+        setQuestion('What is the capital of ' + country + '?');
+        return capital;
     }
 
     useEffect(() => {
