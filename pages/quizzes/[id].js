@@ -1,15 +1,18 @@
 import {useRouter} from 'next/router';
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
-
+import { Question } from './question';
+import ReactDOM from 'react-dom';
 
 export default function Quiz ( { quiz }) {
+
     const router = useRouter();
     const { id } = router.query;
     
     const [timer, setTimer] = useState(60);
     const [started, setStarted] = useState(false);
     const [question, setQuestion] = useState('');
+    //const [key, setKey] = useState('');
 
     function startGame () {
         setStarted(true);
@@ -17,26 +20,19 @@ export default function Quiz ( { quiz }) {
         button.parentElement.removeChild(button);
 
         const key = generateQuestion();
+
         const area = document.getElementById('answer-area');
         area.innerHTML = '';
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.id = 'answer-input';
-        area.appendChild(input);
-        const submit = document.createElement('button');
-        submit.onclick = ((key) => {
-            console.log(answer);
-            console.log(guess);
-            const guess = document.getElementById('answer-input');
-            if (guess.value === answer) {
-                console.log('correct');
-            } else {
-                console.log('wrong');
-            }
-            guess.value = "";
-        })
-        button.innerHTML = 'Submit';
-        area.appendChild(button);
+        ReactDOM.render(<Question submitAnswer={submitAnswer} answer={key}/>, area);
+    }
+
+    function submitAnswer (params) {
+        const guess = document.getElementById('answer-input').value;
+        if (guess === params) {
+            document.getElementsByTagName('body')[0].style.backgroundColor = 'green';
+        } else {
+            document.getElementsByTagName('body')[0].style.backgroundColor = 'red';
+        }
     }
 
     function generateQuestion () { 
@@ -54,7 +50,6 @@ export default function Quiz ( { quiz }) {
         }
         setTimeout(() => {
           setTimer(timer - 1);
-          console.log('timer');
         }, 1000);
       }, [timer, started]);
 
