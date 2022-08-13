@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { Question } from './question';
 import ReactDOM from 'react-dom';
+import { unmountComponentAtNode } from "react-dom";
 
 export default function Quiz ( { quiz }) {
 
@@ -12,26 +13,39 @@ export default function Quiz ( { quiz }) {
     const [timer, setTimer] = useState(60);
     const [started, setStarted] = useState(false);
     const [question, setQuestion] = useState('');
-    //const [key, setKey] = useState('');
+    const [score, setScore] = useState();
 
     function startGame () {
         setStarted(true);
         const button = document.getElementById('begin-btn');
         button.parentElement.removeChild(button);
+        document.getElementById('playerScore').style.visibility = 'visible';
+        newQuestion();
+    }
 
+    function newQuestion (params) {
         const key = generateQuestion();
 
         const area = document.getElementById('answer-area');
-        area.innerHTML = '';
+        unmountComponentAtNode(area);
         ReactDOM.render(<Question submitAnswer={submitAnswer} answer={key}/>, area);
+        document.getElementById('answer-input').focus();
+        if (params) {
+            area.appendChild(params);
+        }
     }
 
     function submitAnswer (params) {
         const guess = document.getElementById('answer-input').value;
-        if (guess === params) {
+        if (guess.toLowerCase() === params.toLowerCase()) {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'green';
+            newQuestion();
+            setScore(score + 1);
         } else {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'red';
+            const wrongText = document.createElement('h3');
+            wrongText.innerHTML = `Incorrect - The answer was ${guess}!`
+            newQuestion(wrongText);
         }
     }
 
@@ -46,6 +60,8 @@ export default function Quiz ( { quiz }) {
 
     useEffect(() => {
         if (timer === 0 || started === false) {
+            const area = document.getElementById('answer-area');
+            unmountComponentAtNode(area);
           return;
         }
         setTimeout(() => {
@@ -57,13 +73,16 @@ export default function Quiz ( { quiz }) {
         <Head>
             <title></title>
         </Head>
-        <h1>HELLO</h1>
-        <h2>{timer}</h2>
-        <div id='begin-screen'>
-            <button onClick={startGame} id='begin-btn'>Begin Game</button>
-        </div>
-        <h3>{question}</h3>
-        <div id='answer-area'></div>
+        <body class='answerBody'>
+            <h1>Geography Quiz</h1>
+            <h2 class='answerTitle'>{timer}</h2>
+            <div id='begin-screen'>
+                <button onClick={startGame} id='begin-btn'>Begin Game</button>
+            </div>
+            <h3>{question}</h3>
+            <div id='answer-area'></div>
+            <h3 id='playerScore'>Score: {score}</h3>
+        </body>
     </>);
 }
 

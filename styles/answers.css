@@ -1,0 +1,21 @@
+.answerBody {
+    text-align: center;
+}
+
+.answerTitle {
+    margin-top: 10vh;
+}
+
+.answerSubmit, #answer-input {
+    margin-top: 3vh;
+    height: 4vh;
+}
+
+.answerSubmit {
+    margin-left: 2vw;
+    width: 8vw;
+}
+
+#answer-input {
+    width: 16vw;
+}
