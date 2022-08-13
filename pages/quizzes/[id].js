@@ -44,7 +44,7 @@ export default function Quiz ( { quiz }) {
         } else {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'red';
             const wrongText = document.createElement('h3');
-            wrongText.innerHTML = `Incorrect - The answer was ${guess}!`
+            wrongText.innerHTML = `Incorrect - The correct answer was ${params}!`
             newQuestion(wrongText);
         }
     }
