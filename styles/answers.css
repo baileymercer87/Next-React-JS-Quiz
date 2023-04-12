@@ -19,3 +19,7 @@
 #answer-input {
     width: 16vw;
 }
+
+.answerScore {
+    margin-top: 3vh;
+}

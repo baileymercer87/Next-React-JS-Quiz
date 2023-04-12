@@ -13,7 +13,7 @@ export default function Quiz ( { quiz }) {
     const [timer, setTimer] = useState(60);
     const [started, setStarted] = useState(false);
     const [question, setQuestion] = useState('');
-    const [score, setScore] = useState();
+    const [score, setScore] = useState(0);
 
     function startGame () {
         setStarted(true);
@@ -58,6 +58,12 @@ export default function Quiz ( { quiz }) {
         return capital;
     }
 
+    function keyUp (event, answer) {
+        if (event.charCode === 13) {
+            submitAnswer();
+        }
+    }
+
     useEffect(() => {
         if (timer === 0 || started === false) {
             const area = document.getElementById('answer-area');
@@ -73,9 +79,9 @@ export default function Quiz ( { quiz }) {
         <Head>
             <title></title>
         </Head>
-        <body class='answerBody'>
+        <body className={'answerBody'}>
             <h1>Geography Quiz</h1>
-            <h2 class='answerTitle'>{timer}</h2>
+            <h2 className={'answerTitle'}>{timer}</h2>
             <div id='begin-screen'>
                 <button onClick={startGame} id='begin-btn'>Begin Game</button>
             </div>
