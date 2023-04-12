@@ -36,6 +36,7 @@ export default function Quiz ( { quiz }) {
     }
 
     function submitAnswer (params) {
+        console.log('roger')
         const guess = document.getElementById('answer-input').value;
         if (guess.toLowerCase() === params.toLowerCase()) {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'green';

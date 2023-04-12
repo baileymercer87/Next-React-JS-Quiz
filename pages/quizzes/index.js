@@ -1,6 +1,6 @@
 import Head from 'next/head';
 export default function QuizList () {
-    const quiz_array = [["eurocap", "eurocap.json"]];
+    const quiz_array = [["eurocap", "eurocap.json"], ["eurocap", "eurocap.json"], ["eurocap", "eurocap.json"], ["eurocap", "eurocap.json"], ["eurocap", "eurocap.json"]];
 
     return (<div>
         <Head>
