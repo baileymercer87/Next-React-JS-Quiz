@@ -36,12 +36,14 @@ export default function Quiz ( { quiz }) {
     }
 
     function submitAnswer (params) {
-        console.log('roger')
+        console.log(score)
         const guess = document.getElementById('answer-input').value;
         if (guess.toLowerCase() === params.toLowerCase()) {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'green';
             newQuestion();
-            setScore(score + 1);
+            console.log(score);
+            setScore(12);
+            console.log(score);
         } else {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'red';
             const wrongText = document.createElement('h3');
@@ -57,12 +59,6 @@ export default function Quiz ( { quiz }) {
         const country = keys[rand];
         setQuestion('What is the capital of ' + country + '?');
         return capital;
-    }
-
-    function keyUp (event, answer) {
-        if (event.charCode === 13) {
-            submitAnswer();
-        }
     }
 
     useEffect(() => {

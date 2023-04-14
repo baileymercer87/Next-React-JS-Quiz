@@ -22,7 +22,7 @@ export default function Home() {
       <section className={styles.section}>
         <ul className={styles.list}>
           {quiz_array.map((quiz) => {
-             return <li className={styles.listItem} key={quiz[2]} onClick={event => handleSelection(quiz[0])}>{quiz[0]}</li>
+             return <li className={styles.listItem} onClick={event => handleSelection(quiz[0])}><img className={styles.menuImage} src='euro-background.png' alt='error'></img><p className={styles.listItemText}>{quiz[0]}</p></li>
           })}
         </ul>
      </section>
