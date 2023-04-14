@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 import Router from "next/router";
 
 export default function Home() {
-  const quiz_array = [["eurocap", "eurocap.json", "eurocap.png"]];
+  const quiz_array = [["European Capital Cities", "eurocap", "euro-background.png"]];
 
   function handleSelection (selection) {
     const { pathname } = Router;
@@ -22,7 +22,7 @@ export default function Home() {
       <section className={styles.section}>
         <ul className={styles.list}>
           {quiz_array.map((quiz) => {
-             return <li className={styles.listItem} onClick={event => handleSelection(quiz[0])}><img className={styles.menuImage} src='euro-background.png' alt='error'></img><p className={styles.listItemText}>{quiz[0]}</p></li>
+             return <li className={styles.listItem} onClick={event => handleSelection(quiz[1])}><img className={styles.menuImage} src={quiz[2]} alt='error'></img><p className={styles.listItemText}>{quiz[0]}</p></li>
           })}
         </ul>
      </section>
