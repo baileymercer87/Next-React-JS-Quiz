@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.css'
 import Router from "next/router";
 
 export default function Home() {
-  const quiz_array = [["European Capital Cities", "eurocap", "euro-background.png"], ["World Capital Cities", "eurocap", "world-background.png"], ["Asian Capital Cities", "eurocap", "asia-background.png"]]; 
+  const quiz_array = [["European Capital Cities", "eurocap", "euro-background.png"], ["World Capital Cities", "eurocap", "world-background.png"], ["Asian Capital Cities", "asiacap", "asia-background.png"]]; 
 
   function handleSelection (selection) {
     const { pathname } = Router;

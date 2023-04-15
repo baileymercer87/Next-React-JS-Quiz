@@ -36,14 +36,11 @@ export default function Quiz ( { quiz }) {
     }
 
     function submitAnswer (params) {
-        console.log(score)
         const guess = document.getElementById('answer-input').value;
         if (guess.toLowerCase() === params.toLowerCase()) {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'green';
+            setScore(score + 1);
             newQuestion();
-            console.log(score);
-            setScore(12);
-            console.log(score);
         } else {
             document.getElementsByTagName('body')[0].style.backgroundColor = 'red';
             const wrongText = document.createElement('h3');
@@ -69,6 +66,7 @@ export default function Quiz ( { quiz }) {
         }
         setTimeout(() => {
           setTimer(timer - 1);
+          console.log(score);
         }, 1000);
       }, [timer, started]);
 
