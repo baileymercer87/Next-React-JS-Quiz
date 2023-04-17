@@ -39,13 +39,19 @@ export default function Quiz ( { quiz }) {
     }
 
     function submitAnswer (params) {
+
         const guess = document.getElementById('answer-input').value;
+
         if (guess.toLowerCase() === params.toLowerCase()) {
-            document.getElementsByTagName('body')[0].style.backgroundColor = 'green';
-            setScore(score + 1);
-            newQuestion();
+            document.getElementsByClassName('answerBody')[0].style.backgroundColor = 'green';
+            document.getElementsByTagName('html')[0].style.backgroundColor = 'green';
+            setScore(score => score + 1);
+            const wrongText = document.createElement('h3');
+            wrongText.innerHTML = `Correct!`
+            newQuestion(wrongText);
         } else {
-            document.getElementsByTagName('body')[0].style.backgroundColor = 'red';
+            document.getElementsByClassName('answerBody')[0].style.backgroundColor = 'red';
+            document.getElementsByTagName('html')[0].style.backgroundColor = 'red';
             const wrongText = document.createElement('h3');
             wrongText.innerHTML = `Incorrect - The correct answer was ${params}!`
             newQuestion(wrongText);
@@ -67,9 +73,9 @@ export default function Quiz ( { quiz }) {
             unmountComponentAtNode(area);
           return;
         }
+
         setTimeout(() => {
           setTimer(timer - 1);
-          console.log(score);
         }, 1000);
       }, [timer, started]);
 
