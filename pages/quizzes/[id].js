@@ -3,6 +3,7 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { Question } from './question';
 import ReactDOM from 'react-dom';
+import styles from '../../styles/Home.module.css'
 import { unmountComponentAtNode } from "react-dom";
 
 export default function Quiz ( { quiz }) {
@@ -19,6 +20,8 @@ export default function Quiz ( { quiz }) {
         setStarted(true);
         const button = document.getElementById('begin-btn');
         button.parentElement.removeChild(button);
+        const text = document.getElementById('begin-txt');
+        text.parentElement.removeChild(text);
         document.getElementById('playerScore').style.visibility = 'visible';
         newQuestion();
     }
@@ -78,7 +81,8 @@ export default function Quiz ( { quiz }) {
             <h1>Geography Quiz</h1>
             <h2 className={'answerTitle'}>{timer}</h2>
             <div id='begin-screen'>
-                <button onClick={startGame} id='begin-btn'>Begin Game</button>
+                <button onClick={startGame} className={styles.startButton} id='begin-btn'>Begin Game</button>
+                <p id='begin-txt'>When you press begin, you will have 1 minute to answer as many questions as possible, after this time the game will end automatically.<br/>Please note that spelling is important.<br/><br/>Good Luck!</p>
             </div>
             <h3>{question}</h3>
             <div id='answer-area'></div>

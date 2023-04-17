@@ -17,7 +17,7 @@ export default function Home() {
     </Head>
       <header className={styles.header}>
         <h1 className={styles.h1}>General Knowledge Quiz</h1>
-        <h2>Select your quiz option from below:</h2>
+        <h2>Select the quiz you would like to start from the list below!</h2>
       </header>
       <section className={styles.section}>
         <ul className={styles.list}>
