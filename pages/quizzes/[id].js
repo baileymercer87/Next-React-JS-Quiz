@@ -2,6 +2,7 @@ import {useRouter} from 'next/router';
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { Question } from './question';
+import { Endscreen } from './endscreen';
 import ReactDOM from 'react-dom';
 import styles from '../../styles/Home.module.css'
 import { unmountComponentAtNode } from "react-dom";
@@ -13,11 +14,13 @@ export default function Quiz ( { quiz }) {
     
     const [timer, setTimer] = useState(60);
     const [started, setStarted] = useState(false);
+    const [played, setPlayed] = useState(false);
     const [question, setQuestion] = useState('');
     const [score, setScore] = useState(0);
 
     function startGame () {
         setStarted(true);
+        setPlayed(true);
         const button = document.getElementById('begin-btn');
         button.parentElement.removeChild(button);
         const text = document.getElementById('begin-txt');
@@ -71,7 +74,12 @@ export default function Quiz ( { quiz }) {
         if (timer === 0 || started === false) {
             const area = document.getElementById('answer-area');
             unmountComponentAtNode(area);
-          return;
+            if (played) {
+                const endScreen = document.getElementById('begin-screen');
+                ReactDOM.render(<Endscreen score={score} startGame={startGame}/>, endScreen);
+                setPlayed(false);
+            }
+            return;
         }
 
         setTimeout(() => {
